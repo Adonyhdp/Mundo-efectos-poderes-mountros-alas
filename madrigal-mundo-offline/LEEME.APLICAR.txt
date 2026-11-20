@@ -1,0 +1,27 @@
+Madrigal: reparación del mundo y empaquetado offline
+Preparado por CodeRabbit.
+
+Base: ZoeyJF555/Mu-Offline-Mobile-nuevo- @ a8e34c9bff8e017845778d3cf19e9c7080dfdeba
+Este ZIP contiene solo los archivos modificados. Extrae su contenido en la raíz
+de una copia del repositorio original y reemplaza los archivos coincidentes.
+Conserva la carpeta public completa del original y copia también .github.
+No extraigas el ZIP sobre el repositorio nuevo vacío para intentar compilarlo.
+
+En local, con Node 24 y Bun 1.4.2:
+  bun install --frozen-lockfile
+  bun run dev
+  bun run build
+  node --test scripts/flyff-terrain.test.mjs
+
+GitHub Actions:
+  Al subir a main o master, configura Pages para desplegar desde GitHub Actions.
+  El workflow Android genera un APK de prueba como Artifact de la ejecución.
+  Para Releases, configura ANDROID_KEYSTORE_BASE64, ANDROID_KEY_ALIAS,
+  ANDROID_KEYSTORE_PASSWORD y ANDROID_KEY_PASSWORD como secretos en GitHub.
+  Conserva la misma clave de firma para publicar actualizaciones. Instala el
+  nuevo APK firmado encima del anterior: el teléfono no lo instala solo.
+
+Antes de pasar del APK anterior que cargaba Pages al APK con archivos locales,
+abre el menú de sincronización, exporta el archivo Dexie y guárdalo en privado.
+Tras instalar el APK local, importa ese archivo. IndexedDB depende del origen:
+el nuevo APK no puede leer directamente lo guardado por el APK anterior.
